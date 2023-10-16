@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fake It Till You Make It</title>
+    <link rel="shortcut icon" type="image/jpg" href="img/favicon.ico" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <script src="https://kit.fontawesome.com/49f46e7382.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+        <div class="container is-max-desktop">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="https://www.microsoft.com/en-us/research/lab/mixed-reality-ai-lab-cambridge/">
+                    <img src="img/Microsoft-logo.svg" alt="Mesh Labs – Cambridge" style="height: 1.4rem;">
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="https://www.microsoft.com/en-us/research/lab/mixed-reality-ai-lab-cambridge/">
+                        Mesh Labs
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <a class="navbar-item" href="https://3dvconf.github.io/2024/" style="font-weight: bold;">
+                        <span class="is-hidden-touch">3<span style="color:#ac9add">D</span><span style="color:#8e9add">V</span> 2024</span>
+                        <span class="is-hidden-desktop">3<span style="color:#ac9add">D</span><span style="color:#8e9add">V</span> 2024</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h1 class="title is-2 has-text-centered">
+                SimpleEgo
+            </h1>
+            <p class="subtitle is-4 has-text-centered">
+                Predicting probabilistic body pose from egocentric cameras
+            </p>
+            <p class="subtitle is-5 has-text-centered has-text-grey">
+                International Conference on 3D Vision 2024
+            </p>
+
+            <p class="subtitle is-6 has-text-centered authors" style="line-height: 1.5;">
+                <span>
+                    <a href="">Hanz&nbsp;Cuevas&nbsp;Vel&aacute;squez</a>
+                </span>
+                <span>
+                    <a href="https://chewitt.me/">Charlie&nbsp;Hewitt</a>
+                </span>
+                <span>
+                    <a href="">Sadegh&nbsp;Aliakbarian</a>
+                </span>
+                <span>
+                    <a href="mailto:tabaltru@microsoft.com">Tadas&nbsp;Baltru&scaron;aitis</a>
+                </span>
+            </p>
+        </div>
+        <div class="container is-max-desktop has-text-centered mt-5">
+            <a href="TODO" class="button is-rounded is-link is-light mr-2">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper</span>
+            </a>
+            <!-- <a href="TODO" class="button is-rounded is-link is-light mr-2">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+            </a> -->
+            <!-- <a href="TODO" class="button is-rounded is-link is-light mr-2">
+                <span class="icon"><i class="fab fa-youtube"></i></span>
+                <span>Video</span>
+            </a> -->
+            <a href="https://github.com/microsoft/SimpleEgo" class="button is-rounded is-link is-light">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Dataset</span>
+            </a>
+        </div>
+    </section>
+    <!-- <section>
+        <div class="container is-max-desktop">
+            <figure class="image is-16by9">
+                <iframe class="has-ratio" width="640" height="360" src="https://youtube.com/embed/TODO" frameborder="0" allowfullscreen></iframe>
+            </figure>
+        </div>
+    </section> -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Abstract
+            </h1>
+            <div class="content has-text-justified-desktop">
+                TODO
+            </div>
+        </div>
+    </section>
+
+    <section class="section pt-0">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                BibTeX
+            </h1>
+            <pre>
+TODO
+</pre>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                Work conducted at the <a href=https://www.microsoft.com/en-us/research/lab/mixed-reality-ai-lab-cambridge>Mesh Labs &ndash; Cambridge</a>.<br/>
+                <img src="img/Microsoft-logo-only.svg" class="mt-5" alt="Mesh Labs – Cambridge" style="height: 2rem;">
+            </p>
+        </div>
+    </footer>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+
+            // Add a click event on each of them
+            $navbarBurgers.forEach(el => {
+                el.addEventListener('click', () => {
+
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+
+                });
+            });
+        }
+    });
+</script>
+
+</html>
