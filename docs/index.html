@@ -73,10 +73,10 @@
                 <span class="icon"><i class="fas fa-file-pdf"></i></span>
                 <span>Paper</span>
             </a>
-            <!-- <a href="TODO" class="button is-rounded is-link is-light mr-2">
+            <a href="TODO" class="button is-rounded is-link is-light mr-2">
                 <span class="icon"><i class="ai ai-arxiv"></i></span>
                 <span>arXiv</span>
-            </a> -->
+            </a>
             <!-- <a href="TODO" class="button is-rounded is-link is-light mr-2">
                 <span class="icon"><i class="fab fa-youtube"></i></span>
                 <span>Video</span>
@@ -103,15 +103,15 @@
                 <p>
                     Our work addresses the problem of egocentric human pose estimation from downwards-facing cameras on head-mounted devices (HMD).
                     This presents a challenging scenario, as parts of the body often fall outside of the image or are occluded.
-                    Previous solutions minimize this problem by using fish-eye camera lenses to capture a wider view, but these present hardware design issues.
+                    Previous solutions minimize this problem by using fish-eye camera lenses to capture a wider view, but these can present hardware design issues.
                     They also predict 2D heat-maps per joint and lift them to 3D space to deal with self-occlusions, but this requires large network architectures which are impractical to deploy on resource-constrained HMDs.
-                    We predict pose from images captured using conventional rectilinear camera lenses.
-                    This resolves physical design issues, but means body parts are often out of frame.
-                    As such, we directly regress probabilistic joint rotations for a parameterized body model and model the joint rotations as probability density functions.
+                    We predict pose from images captured with conventional rectilinear camera lenses.
+                    This resolves hardware design issues, but means body parts are often out of frame.
+                    As such, we directly regress probabilistic joint rotations represented as matrix Fisher distributions for a parameterized body model.
                     This allows us to quantify pose uncertainties and explain out-of-frame or occluded joints.
-                    This also removes the need to compute 2D heat-maps and allows for simplified architectures which require less compute resource.
-                    Given the lack of any egocentric datasets using rectilinear camera lenses, we generate a large synthetic dataset comprising 60K stereo images with high diversity of pose, shape, clothing and skin tone.
-                    Our approach achieves state-of-the-art results for this challenging configuration, reducing mean per-joint position error by 23&percnt; overall and 58&percnt; for the lower body.
+                    This also removes the need to compute 2D heat-maps and allows for simplified DNN architectures which require less compute.
+                    Given the lack of egocentric datasets using rectilinear camera lenses, we introduce the SynthEgo dataset, a synthetic dataset with 60K stereo images containing high diversity of pose, shape, clothing and skin tone.
+                    Our approach achieves state-of-the-art results for this challenging configuration, reducing mean per-joint position error by 23% overall and 58% for the lower body.
                     Our architecture also has eight times fewer parameters and runs twice as fast as the current state-of-the-art.
                     Experiments show that training on our synthetic dataset leads to good generalization to real world images without fine-tuning.
                 </p>
