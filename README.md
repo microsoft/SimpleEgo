@@ -5,32 +5,35 @@
 The SynthEgo dataset was introduced in our paper [**SimpleEgo: Predicting probabilistic body pose from egocentric cameras**](https://microsoft.github.io/SimpleEgo/).
 
 The dataset contains:
+
 - 60,000 stereo pair synthetic RGB images from a head mounted camera at 1280x720 pixel resolution.
-- SMPL-H pose and identity parameters for each stereo pair.
+- [SMPL-H](https://mano.is.tue.mpg.de/) pose and identity parameters for each stereo pair.
 - 3D joint locations in world and camera space for each image.
 - 2D joint locations in image space for each image.
 - Camera parameters for each image.
 
 ## Downloading the dataset
 
-You can download the dataset in parts from the folling links:
-- [Part 1]()
-- [Part 2]()
-- [Part 3]()
-- [Part 4]()
-- [Part 5]()
-- [Part 6]()
-- [Part 7]()
-- [Part 7]()
-- [Part 9]()
-- [Part 10]()
+You can download the dataset in parts (3GB each) from the following links:
+
+- [Part 1](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_01.zip)
+- [Part 2](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_02.zip)
+- [Part 3](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_03.zip)
+- [Part 4](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_04.zip)
+- [Part 5](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_05.zip)
+- [Part 6](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_06.zip)
+- [Part 7](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_07.zip)
+- [Part 7](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_08.zip)
+- [Part 9](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_09.zip)
+- [Part 10](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_10.zip)
 
 ## Dataset layout
 
 Once extracted, the dataset contains files for each sample of the form:
+
 - `metadata_0000000_0000.json`
-- `img_L_0000000_0000.png`
-- `img_R_0000000_0000.png`
+- `img_L_0000000_0000.jpg`
+- `img_R_0000000_0000.jpg`
 
 Where the first number indicates the subject index from 0 to 6000, and the second number indicates the frame index from 0 to 10.
 The metadata files are structured as follows:
@@ -62,7 +65,7 @@ The metadata files are structured as follows:
 
 If you use the SynthEgo Dataset your research, please cite the following [paper](TODO):
 
-```
+```bibtex
 @inproceedings{cuevas2024simpleego,
 TODO
 }
