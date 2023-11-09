@@ -1,4 +1,4 @@
-![alt text](docs/img/dataset_samples.jpg)
+![SynthEgo dataset s](docs/img/dataset_samples.jpg)
 
 # The SynthEgo dataset
 
@@ -63,7 +63,7 @@ The metadata files are structured as follows:
 
 ## Citation
 
-If you use the SynthEgo Dataset your research, please cite the following [paper](TODO):
+If you use the SynthEgo Dataset your research, please cite the following paper:
 
 ```bibtex
 @inproceedings{cuevas2024simpleego,
