@@ -10,17 +10,27 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <script src="https://kit.fontawesome.com/49f46e7382.js" crossorigin="anonymous"></script>
-
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
 </head>
 
 <body>
     <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
         <div class="container is-max-desktop">
             <div class="navbar-brand">
-                <a class="navbar-item" href="https://www.microsoft.com/en-us/research/lab/mixed-reality-ai-lab-cambridge/">
+                <a class="navbar-item"
+                    href="https://www.microsoft.com/en-us/research/lab/mixed-reality-ai-lab-cambridge/">
                     <img src="img/Microsoft-logo.svg" alt="Mesh Labs – Cambridge" style="height: 1.4rem;">
                 </a>
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                    data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -28,14 +38,17 @@
             </div>
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item" href="https://www.microsoft.com/en-us/research/lab/mixed-reality-ai-lab-cambridge/">
+                    <a class="navbar-item"
+                        href="https://www.microsoft.com/en-us/research/lab/mixed-reality-ai-lab-cambridge/">
                         Mesh Labs
                     </a>
                 </div>
                 <div class="navbar-end">
                     <a class="navbar-item" href="https://3dvconf.github.io/2024/" style="font-weight: bold;">
-                        <span class="is-hidden-touch">3<span style="color:#ac9add">D</span><span style="color:#8e9add">V</span> 2024</span>
-                        <span class="is-hidden-desktop">3<span style="color:#ac9add">D</span><span style="color:#8e9add">V</span> 2024</span>
+                        <span class="is-hidden-touch">3<span style="color:#ac9add">D</span><span
+                                style="color:#8e9add">V</span> 2024</span>
+                        <span class="is-hidden-desktop">3<span style="color:#ac9add">D</span><span
+                                style="color:#8e9add">V</span> 2024</span>
                     </a>
                 </div>
             </div>
@@ -101,24 +114,302 @@
             </h1>
             <div class="content has-text-justified-desktop">
                 <p>
-                    Our work addresses the problem of egocentric human pose estimation from downwards-facing cameras on head-mounted devices (HMD).
-                    This presents a challenging scenario, as parts of the body often fall outside of the image or are occluded.
-                    Previous solutions minimize this problem by using fish-eye camera lenses to capture a wider view, but these can present hardware design issues.
-                    They also predict 2D heat-maps per joint and lift them to 3D space to deal with self-occlusions, but this requires large network architectures which are impractical to deploy on resource-constrained HMDs.
+                    Our work addresses the problem of egocentric human pose estimation from downwards-facing cameras on
+                    head-mounted devices (HMD).
+                    This presents a challenging scenario, as parts of the body often fall outside of the image or are
+                    occluded.
+                    Previous solutions minimize this problem by using fish-eye camera lenses to capture a wider view,
+                    but these can present hardware design issues.
+                    They also predict 2D heat-maps per joint and lift them to 3D space to deal with self-occlusions, but
+                    this requires large network architectures which are impractical to deploy on resource-constrained
+                    HMDs.
                     We predict pose from images captured with conventional rectilinear camera lenses.
                     This resolves hardware design issues, but means body parts are often out of frame.
-                    As such, we directly regress probabilistic joint rotations represented as matrix Fisher distributions for a parameterized body model.
+                    As such, we directly regress probabilistic joint rotations represented as matrix Fisher
+                    distributions for a parameterized body model.
                     This allows us to quantify pose uncertainties and explain out-of-frame or occluded joints.
-                    This also removes the need to compute 2D heat-maps and allows for simplified DNN architectures which require less compute.
-                    Given the lack of egocentric datasets using rectilinear camera lenses, we introduce the SynthEgo dataset, a synthetic dataset with 60K stereo images containing high diversity of pose, shape, clothing and skin tone.
-                    Our approach achieves state-of-the-art results for this challenging configuration, reducing mean per-joint position error by 23% overall and 58% for the lower body.
-                    Our architecture also has eight times fewer parameters and runs twice as fast as the current state-of-the-art.
-                    Experiments show that training on our synthetic dataset leads to good generalization to real world images without fine-tuning.
+                    This also removes the need to compute 2D heat-maps and allows for simplified DNN architectures which
+                    require less compute.
+                    Given the lack of egocentric datasets using rectilinear camera lenses, we introduce the
+                    <i>SynthEgo</i> dataset, a synthetic dataset with 60K stereo images containing high diversity of
+                    pose, shape, clothing and skin tone.
+                    Our approach achieves state-of-the-art results for this challenging configuration, reducing mean
+                    per-joint position error by 23% overall and 58% for the lower body.
+                    Our architecture also has eight times fewer parameters and runs twice as fast as the current
+                    state-of-the-art.
+                    Experiments show that training on our synthetic dataset leads to good generalization to real world
+                    images without fine-tuning.
                 </p>
             </div>
         </div>
     </section>
 
+
+    <section class="section pt-0">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Dataset
+            </h1>
+            <img class="mb-5" src="img/dataset_samples.jpg">
+            <div class="content has-text-justified-desktop">
+                <p>
+                    To construct the <i>SynthEgo</i> dataset we render 60K stereo pairs at 1280&times;720 pixel
+                    resolution, building on the pipeline of <a href="https://arxiv.org/pdf/2301.01161">Hewitt et al</a>.
+                    This dataset is comprised of 6000 unique identities, each performing 10 different poses in 10
+                    different lighting environments.
+                    Each identity is made up of a randomly sampled body shape, skin textures sampled from a library of
+                    25 and randomly recolored, and clothing assets sampled from a library of 202.
+                    Lighting environments are sampled from a library of 489 HDRIs, to ensure correct disparity of the
+                    environment between the stereo pair, we project the HDRI background onto the ground plane.
+                    Poses are sampled from a library of over 2 million unique poses and randomly mirrored; sampling is
+                    weighted by the mean absolute joint angle and common poses like T-pose are significantly
+                    down-weighted to increase diversity.
+                </p>
+
+                <table>
+                    <thead>
+                        <th></th>
+                        <th><a
+                                href="https://vcai.mpi-inf.mpg.de/projects/wxu/Mo2Cap2/">Mo<sup>2</sup>Cap<sup>2</sup></a>
+                        </th>
+                        <th><a href="https://github.com/facebookresearch/xR-EgoPose">xR-EgoPose</a></th>
+                        <th><a href="https://4dqv.mpi-inf.mpg.de/UnrealEgo/">UnrealEgo</a></th>
+                        <th><i>SynthEgo</i></th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Unique Identities</td>
+                            <td>700</td>
+                            <td>46</td>
+                            <td>17</td>
+                            <td>6000</td>
+                        </tr>
+                        <tr>
+                            <td>Environments</td>
+                            <td>Unspecified</td>
+                            <td>Unspecified</td>
+                            <td>14</td>
+                            <td>489</td>
+                        </tr>
+                        <tr>
+                            <td>Body Model</td>
+                            <td>SMPL</td>
+                            <td>Unspecified</td>
+                            <td>UnrealEngine</td>
+                            <td>SMPL-H</td>
+                        </tr>
+                        <tr>
+                            <td>Lens Type</td>
+                            <td>Fisheye</td>
+                            <td>Fisheye</td>
+                            <td>Fisheye</td>
+                            <td>Rectilinear</td>
+                        </tr>
+                        <tr>
+                            <td>Mono/Stereo</td>
+                            <td>Mono</td>
+                            <td>Mono</td>
+                            <td>Stereo</td>
+                            <td>Stereo</td>
+                        </tr>
+                        <tr>
+                            <td>Body Shape GT</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>&#10003;</td>
+                        </tr>
+                        <tr>
+                            <td>Joint Location GT</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                        </tr>
+                        <tr>
+                            <td>Joint Rotation GT</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>&#10003;</td>
+                        </tr>
+                        <tr>
+                            <td>Realism</td>
+                            <td>Low</td>
+                            <td>Medium</td>
+                            <td>High</td>
+                            <td>High</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    We position the camera on the front of the forehead looking down at the body.
+                    The camera uses a pinhole model approximating the <a href="https://www.stereolabs.com/zed-mini/">ZED
+                        mini stereo</a>.
+                    We add uniform noise within &plusmn;1 cm to the location and &plusmn;10&deg; around all axes of
+                    rotation of the camera to simulate misplacement and movement of the HMD on the head.
+                    The resulting images are typically quite challenging for pose estimation, as many parts of the body
+                    are often not seen by the camera.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="section pt-0">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Method
+            </h1>
+            <div class="content has-text-justified-desktop">
+                <p>
+                    The goal of our method is to estimate the probability distribution over joint rotations $\mathbf{R}
+                    = \{\mathbf{R}_i\}^{N}_{i=1}$ conditioned on input image data $\mathbf{X}$,
+                    $p(\mathbf{R}|\mathbf{X})$.
+                    Following <a href="https://github.com/akashsengupta1997/HierarchicalProbabilistic3DHuman">Sengupta
+                        et al</a>, we train a neural network to regress Fisher parameters $\mathbf{F} =
+                    \{\mathbf{F}_i\}^{N}_{i=1}$ given input image data $\mathbf{X}$.
+                    From these predicted parameters we can calculate the expected rotation, $\mathbf{\hat{R}}_i$ and the
+                    concentration parameters for each joint $i$, $\kappa_{i,j}$.
+                    The latter describes the uncertainty of the rotation distribution.
+                </p>
+
+                <p>
+                    We train the neural network by minimizing loss $\mathcal{L} = \mathcal{L}_{FNLL} + \mathcal{L}_J$.
+                    $\mathcal{L}_{FNLL}$ is the matrix Fisher negative log-likelihood, promoting accurate local joint
+                    rotations.
+                    $$
+                    \begin{aligned}
+                    \mathcal{L}_{FNLL}&=\sum_{i=1}^{N}log(c(\mathbf{F}_i))-\text{tr}(\mathbf{F}_i^\top \mathbf{R}_i)
+                    \end{aligned}
+                    $$
+                    $\mathcal{L}_J$ supervises the 3D joint positions regressed from the parametric body model, SMPL-H,
+                    with shape parameters $\boldsymbol\beta$ with joint regressor $\mathcal{J}$.
+                    $$
+                    \begin{aligned}
+                    J_{3D}(\mathbf{R},\boldsymbol\beta)=&\mathcal{J}(\textit{SMPL-H}(\mathbf{R}, \boldsymbol\beta))\\
+                    \mathcal{L}_{J}=&\left \| J_{3D}(\hat{\mathbf{R}},\boldsymbol\beta)-
+                    J_{3D}(\mathbf{R},\boldsymbol\beta) \right \|^2_2
+                    \end{aligned}
+                    $$
+                    This causes the network to consider the effect of the predicted rotations on the final pose, as the
+                    positions of child joints are influenced by the rotation of their parents in the kinematic tree of
+                    our body model.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="section pt-0">
+        <div class="container is-max-desktop">
+            <h1 class="title is-4">
+                Results
+            </h1>
+
+            <div class="content has-text-centered">
+                <table class="mb-5">
+                    <thead>
+                        <tr>
+                            <th style="vertical-align: middle;" rowspan="2">Input</th>
+                            <th style="vertical-align: middle;" rowspan="2">Method</th>
+                            <th colspan="4">PA-MPJPE (mm)</th>
+                        </tr>
+                        <tr>
+                            <th>Upper Body</th>
+                            <th>Lower Body</th>
+                            <th>Hands</th>
+                            <th>All</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="vertical-align: middle;" rowspan="2">Monocular</td>
+                            <td>xR-EgoPose</td>
+                            <td>50.18</td>
+                            <td>76.76</td>
+                            <td>127.34</td>
+                            <td>97.48</td>
+                        </tr>
+                        <tr>
+                            <td>Ours</td>
+                            <td><b>38.48</b></td>
+                            <td><b>62.35</b></td>
+                            <td><b>98.94</b></td>
+                            <td><b>76.05</b></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle; border-bottom: none;" rowspan="2">Stereo</td>
+                            <td>UnrealEgo</td>
+                            <td>48.06</td>
+                            <td>77.06</td>
+                            <td>117.85</td>
+                            <td>91.67</td>
+                        </tr>
+                        <tr>
+                            <td>Ours</td>
+                            <td><b>34.00</b></td>
+                            <td><b>54.59</b></td>
+                            <td><b>87.78</b></td>
+                            <td><b>67.31</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="columns">
+                <div class="column is-half has-text-justified-desktop">
+                    <p>
+                        To evaluate the performance on real-world data, we recorded a dataset of 8378 stereo pair images
+                        from 11 different subjects performing actions like squatting, sitting, stretching, crossing
+                        arms, and interacting with small objects.
+                        Overall, our stereo network has the best performance.
+                        We observe that the extra information provided by the right image helps the network to better
+                        predict extremities.
+                        We also note that UnrealEgo and xR-EgoPose perform particularity poorly for lower body joints.
+                        This may be caused by the fact that the legs are not always visible, and that 2D heat-maps
+                        cannot provide uncertainties for joints outside of the image frame.
+                    </p>
+                </div>
+                <div class="column is-half">
+                    <img src="img/results.png" alt="Qualitative results on real data" />
+                    <p class="is-size-7">Qualitative results of our method compared to recent work for synthetic and real data.</p>
+                </div>
+            </div>
+
+            <div class="columns">
+                <div class="column is-two-fifths">
+                    <img src="img/joints_uncertainty.png" alt="Joint concentration parameter visualization" />
+                    <p class="is-size-7">Axis specific concentration for different joints. Concentration is lowest around the primary axis of rotation for a given joint.</p>
+                </div>
+                <div class="column is-three-fifths has-text-justified-desktop">
+                    <p>
+                        Our paper demonstrates that the predicted uncertainty estimates capture extra information and
+                        priors about body pose, and shows empirically that the estimated uncertainties are reliable.
+                        While the former allows us to better explain the prediction of the model, the latter is of
+                        significant importance when it comes to deployment of our method in downstream tasks such as
+                        avatar animation, where uncertainty estimates can be used as a measure of reliance of the
+                        predicted poses.
+                    </p>
+                </div>
+            </div>
+
+            <div class="columns has-text-centered mb-0">
+                <div class="column is-one-third pb-0">
+                    All Joints
+                    <img src="img/plot_all_bold.png" alt="Correlation between uncertainty and error for all joints" />
+                </div>
+                <div class="column is-one-third is-hidden-mobile pb-0">
+                    Left Wrist
+                    <img src="img/plot_20_L_Wrist.png" alt="Correlation between uncertainty and error for the left wrist" />
+                </div>
+                <div class="column is-one-third is-hidden-mobile pb-0">
+                    Right Wrist
+                    <img src="img/plot_21_R_Wrist.png" alt="Correlation between uncertainty and error for the right wrist" />
+                </div>
+            </div>
+            <div class="content has-text-centered">
+                <p class="is-size-7">Correlation of confidence with error; the higher the confidence the lower the error. Our confidence estimates are therefore reliable for downstream use.</p>
+            </div>
+        </div>
+    </section>
     <section class="section pt-0">
         <div class="container is-max-desktop">
             <h1 class="title is-4">
@@ -132,7 +423,9 @@ TODO
     <footer class="footer">
         <div class="content has-text-centered">
             <p>
-                Work conducted at <a href=https://www.microsoft.com/en-us/research/lab/mixed-reality-ai-lab-cambridge>Mesh Labs &ndash; Cambridge</a>.<br/>
+                Work conducted at <a
+                    href=https://www.microsoft.com/en-us/research/lab/mixed-reality-ai-lab-cambridge>Mesh Labs &ndash;
+                    Cambridge</a>.<br />
                 <img src="img/Microsoft-logo-only.svg" class="mt-5" alt="Mesh Labs – Cambridge" style="height: 2rem;">
             </p>
         </div>
