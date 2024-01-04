@@ -16,11 +16,11 @@ The dataset contains:
 
 The license terms for the [MANO](https://mano.is.tue.mpg.de/) dataset and parts of the [AMASS](https://amass.is.tue.mpg.de/) dataset prevent redistribution.
 As such, we include names and indices for these poses in the dataset we distribute, but not the pose parameters themselves.
-For simplicity, we provide a script to download the MANO, AMASS and SynthEgo datasets and splice in the relevant pose parameters automatically.
+**For simplicity, we provide a script to download the MANO, AMASS and SynthEgo datasets and splice in the relevant pose parameters automatically.**
 You will need to sign up for MANO and AMASS and provide the relevant credentials when prompted by the script.
 The only requirements for the script are numpy and wget, otherwise simply run `python download_dataset.py` from the command line.
 
-You can download the dataset in parts (3GB each) directly from the following links, though this is not recommended:
+You can download the dataset in parts (3GB each) directly from the following links, though *this is not recommended*:
 
 - [Part 1](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_01.zip)
 - [Part 2](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_02.zip)
