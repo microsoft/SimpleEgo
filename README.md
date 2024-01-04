@@ -1,6 +1,6 @@
-![SynthEgo dataset s](docs/img/dataset_samples.jpg)
+![SynthEgo dataset](docs/img/dataset_samples.jpg)
 
-# The SynthEgo dataset
+# The SynthEgo Dataset
 
 The SynthEgo dataset was introduced in our paper [**SimpleEgo: Predicting probabilistic body pose from egocentric cameras**](https://microsoft.github.io/SimpleEgo/).
 
