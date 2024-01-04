@@ -22,6 +22,7 @@ RIGHT_HAND = SMPL_H_N_J + MANO_N_J
 MANO_FILENAME = "manoposesv10"
 MOSH_FILENAME = "MoSh"
 POSELIM_FILENAME = "PosePrior"
+SYNTHEGO_DIRNAME = "SynthEgo"
 
 
 def _download_mpii_file(
@@ -51,9 +52,6 @@ def _download_mpii_file(
 
 def get_mano(out_dir: Path) -> None:
     """Download MANO data."""
-    if (out_dir / f"{MANO_FILENAME}.zip").exists():
-        print("MANO already downloaded, skipping")
-        return
     print("Downloading MANO...")
     username = input("Username: ")
     password = getpass("Password: ")
@@ -68,9 +66,6 @@ def get_mano(out_dir: Path) -> None:
 
 def get_amass(out_dir: Path) -> None:
     """Download AMASS data."""
-    if (out_dir / "MoSh.tar.bz2").exists() and (out_dir / "PosePrior.tar.bz2").exists():
-        print("AMASS already downloaded, skipping")
-        return
     print("Downloading AMASS...")
     username = input("Username: ")
     password = getpass("Password: ")
@@ -110,9 +105,6 @@ def download_synthego(out_dir: Path) -> None:
     out_dir.mkdir(exist_ok=True, parents=True)
     for part in range(1, 11):
         out_path = out_dir / f"synth_ego_{part:02d}.zip"
-        if out_path.exists():
-            print(f"SynthEgo part {part} already downloaded, skipping")
-            continue
         print(f"Downloading SynthEgo part {part}...")
         url = f"https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_{part:02d}.zip"
         try:
@@ -145,11 +137,13 @@ def main() -> None:
         extract(path)
         path.unlink()
     # download the SynthEgo dataset
-    download_synthego(data_dir / "SynthEgo_zip")
+    zip_dir = data_dir / f"{SYNTHEGO_DIRNAME}_zip"
+    download_synthego(zip_dir)
     # extract the SynthEgo dataset
-    for path in list((data_dir / "SynthEgo_zip").glob("*.zip")):
-        extract(path, data_dir / "SynthEgo")
+    for path in list(zip_dir.glob("*.zip")):
+        extract(path, data_dir / SYNTHEGO_DIRNAME)
         path.unlink()
+    zip_dir.rmdir()
     # load MANO dataset
     mano_left = np.load(
         data_dir
@@ -160,7 +154,7 @@ def main() -> None:
         / f"{MANO_FILENAME}/mano_poses_v1_0/handsOnly_REGISTRATIONS_r_lm___POSES___R.npy"
     )
     # fill in the data
-    for metadata_fn in data_dir.glob("SynthEgo_test/*.json"):
+    for metadata_fn in (data_dir / SYNTHEGO_DIRNAME).glob("*.json"):
         with open(metadata_fn, "r") as f:
             metadata = json.load(f)
             if isinstance(metadata["pose"][1], str):
