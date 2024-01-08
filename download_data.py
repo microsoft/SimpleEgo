@@ -43,11 +43,13 @@ def _download_mpii_file(
                 "--continue",
             ]
         )
+    except FileNotFoundError as exc:
+        raise RuntimeError("wget not found, please install it") from exc
     except subprocess.CalledProcessError:
         print("Download failed, check your login details")
         if out_path.exists():
             out_path.unlink()
-        exit(1)
+        sys.exit(1)
 
 
 def get_mano(out_dir: Path) -> None:
@@ -118,41 +120,20 @@ def download_synthego(out_dir: Path) -> None:
                     "--continue",
                 ]
             )
+        except FileNotFoundError as exc:
+            raise RuntimeError("wget not found, please install it") from exc
         except subprocess.CalledProcessError:
             print("Download failed")
             if out_path.exists():
                 out_path.unlink()
-            exit(1)
+            sys.exit(1)
 
 
-def main() -> None:
-    """Download and process the dataset."""
-    assert len(sys.argv) == 2, "Usage: python process_pose_gt.py <output_dir>"
-    data_dir = Path(sys.argv[1])
-    # download data from MPII sources
-    get_amass(data_dir)
-    get_mano(data_dir)
-    # extract the data
-    for path in list(data_dir.glob("*.zip")) + list(data_dir.glob("*.bz2")):
-        extract(path)
-        path.unlink()
-    # download the SynthEgo dataset
-    zip_dir = data_dir / f"{SYNTHEGO_DIRNAME}_zip"
-    download_synthego(zip_dir)
-    # extract the SynthEgo dataset
-    for path in list(zip_dir.glob("*.zip")):
-        extract(path, data_dir / SYNTHEGO_DIRNAME)
-        path.unlink()
-    zip_dir.rmdir()
+def process_metadata(data_dir: Path) -> None:
+    """Process the metadata to include the correct pose data."""
     # load MANO dataset
-    mano_left = np.load(
-        data_dir
-        / f"{MANO_FILENAME}/mano_poses_v1_0/handsOnly_REGISTRATIONS_r_lm___POSES___L.npy"
-    )
-    mano_right = np.load(
-        data_dir
-        / f"{MANO_FILENAME}/mano_poses_v1_0/handsOnly_REGISTRATIONS_r_lm___POSES___R.npy"
-    )
+    mano_left = np.load(data_dir / f"{MANO_FILENAME}/mano_poses_v1_0/handsOnly_REGISTRATIONS_r_lm___POSES___L.npy")
+    mano_right = np.load(data_dir / f"{MANO_FILENAME}/mano_poses_v1_0/handsOnly_REGISTRATIONS_r_lm___POSES___R.npy")
     # fill in the data
     for metadata_fn in (data_dir / SYNTHEGO_DIRNAME).glob("*.json"):
         with open(metadata_fn, "r") as f:
@@ -163,10 +144,19 @@ def main() -> None:
                 frame = int(seq_name.split("_")[-2])
                 mirrored = seq_name.split("_")[-1] == 1
                 assert not mirrored
-                seq_path = Path("/".join(seq_name.split("/")[1:])).with_suffix(".npz")
+                seq_path = Path("/".join(seq_name.split("/")[1:])).with_suffix(".npz").as_posix()
                 if seq_name.startswith("MoSh_MPI_MoSh"):
+                    # fix paths to match downloaded data
+                    seq_path = seq_path.replace("Data/moshpp_fits_SMPL", "MPI_mosh")
+                    seq_path = seq_path.replace(".npz", "_poses.npz")
+                    if not (data_dir / MOSH_FILENAME / seq_path).exists():
+                        # there is a sequence incorrectly named with _poses_poses
+                        seq_path = seq_path.replace(".npz", "_poses.npz")
                     seq_data = np.load(data_dir / MOSH_FILENAME / seq_path)
                 elif seq_name.startswith("MoSh_MPI_PoseLimits"):
+                    # fix paths to match downloaded data
+                    seq_path = seq_path.replace("Data/moshpp_fits_SMPL", "MPI_Limits")
+                    seq_path = seq_path.replace(".npz", "_poses.npz")
                     seq_data = np.load(data_dir / POSELIM_FILENAME / seq_path)
                 else:
                     raise RuntimeError(f"Unknown sequence name {seq_name}")
@@ -191,6 +181,29 @@ def main() -> None:
                 )
         with open(metadata_fn, "w") as f:
             json.dump(metadata, f, indent=4)
+
+
+def main() -> None:
+    """Download and process the dataset."""
+    assert len(sys.argv) == 2, "Usage: python process_pose_gt.py <output_dir>"
+    data_dir = Path(sys.argv[1])
+    # download data from MPII sources
+    get_amass(data_dir)
+    get_mano(data_dir)
+    # extract the data
+    for path in list(data_dir.glob("*.zip")) + list(data_dir.glob("*.bz2")):
+        extract(path)
+        path.unlink()
+    # download the SynthEgo dataset
+    zip_dir = data_dir / f"{SYNTHEGO_DIRNAME}_zip"
+    download_synthego(zip_dir)
+    # extract the SynthEgo dataset
+    for path in list(zip_dir.glob("*.zip")):
+        extract(path, data_dir / SYNTHEGO_DIRNAME)
+        path.unlink()
+    zip_dir.rmdir()
+    # process the metadata
+    process_metadata(data_dir)
 
 
 if __name__ == "__main__":
