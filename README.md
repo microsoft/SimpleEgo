@@ -72,12 +72,12 @@ The metadata files are structured as follows:
 If you use the SynthEgo Dataset your research, please cite the following paper:
 
 ```bibtex
-@misc{cuevas2024simpleego,
-    title={SimpleEgo: Predicting Probabilistic Body Pose from Egocentric Cameras},
-    author={Hanz Cuevas-Velasquez and Charlie Hewitt and Sadegh Aliakbarian and Tadas Baltru\v{s}aitis},
-    year={2024},
-    eprint={2401.14785},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
+@inproceedings{cuevas2024simpleego,
+  title={{SimpleEgo}: Predicting probabilistic body pose from egocentric cameras},
+  author={Cuevas-Velasquez, Hanz and Hewitt, Charlie and Aliakbarian, Sadegh and Baltru{\v{s}}aitis, Tadas},
+  booktitle={2024 International Conference on 3D Vision (3DV)},
+  pages={1446--1455},
+  year={2024},
+  organization={IEEE}
 }
 ```
