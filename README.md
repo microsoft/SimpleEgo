@@ -22,16 +22,16 @@ The only requirements for the script are numpy and wget, otherwise simply run `p
 
 You can download the dataset in parts (3GB each) directly from the following links, though *this is not recommended*:
 
-- [Part 1](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_01.zip)
-- [Part 2](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_02.zip)
-- [Part 3](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_03.zip)
-- [Part 4](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_04.zip)
-- [Part 5](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_05.zip)
-- [Part 6](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_06.zip)
-- [Part 7](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_07.zip)
-- [Part 7](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_08.zip)
-- [Part 9](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_09.zip)
-- [Part 10](https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_10.zip)
+- [Part 1](https://facesyntheticspubwedata.z6.web.core.windows.net/3dv-2024/synth_ego_01.zip)
+- [Part 2](https://facesyntheticspubwedata.z6.web.core.windows.net/3dv-2024/synth_ego_02.zip)
+- [Part 3](https://facesyntheticspubwedata.z6.web.core.windows.net/3dv-2024/synth_ego_03.zip)
+- [Part 4](https://facesyntheticspubwedata.z6.web.core.windows.net/3dv-2024/synth_ego_04.zip)
+- [Part 5](https://facesyntheticspubwedata.z6.web.core.windows.net/3dv-2024/synth_ego_05.zip)
+- [Part 6](https://facesyntheticspubwedata.z6.web.core.windows.net/3dv-2024/synth_ego_06.zip)
+- [Part 7](https://facesyntheticspubwedata.z6.web.core.windows.net/3dv-2024/synth_ego_07.zip)
+- [Part 7](https://facesyntheticspubwedata.z6.web.core.windows.net/3dv-2024/synth_ego_08.zip)
+- [Part 9](https://facesyntheticspubwedata.z6.web.core.windows.net/3dv-2024/synth_ego_09.zip)
+- [Part 10](https://facesyntheticspubwedata.z6.web.core.windows.net/3dv-2024/synth_ego_10.zip)
 
 ## Dataset layout
 
