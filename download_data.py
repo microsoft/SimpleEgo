@@ -108,7 +108,7 @@ def download_synthego(out_dir: Path) -> None:
     for part in range(1, 11):
         out_path = out_dir / f"synth_ego_{part:02d}.zip"
         print(f"Downloading SynthEgo part {part}...")
-        url = f"https://facesyntheticspubwedata.blob.core.windows.net/3dv-2024/synth_ego_{part:02d}.zip"
+        url = f"https://facesyntheticspubwedata.z6.web.core.windows.net/3dv-2024/synth_ego_{part:02d}.zip"
         try:
             subprocess.check_call(
                 [
